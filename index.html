@@ -157,11 +157,13 @@
         <div class="form-group">
             <label>可出席日期 (可複選)</label>
             <div class="checkbox-group">
-                <!-- 更新後的四個日期選項 -->
-                <label><input type="checkbox" name="dates" value="10/24 (六)"> 10/24 (六)</label>
-                <label><input type="checkbox" name="dates" value="10/25 (日)"> 10/25 (日)</label>
-                <label><input type="checkbox" name="dates" value="10/26 (一)"> 10/26 (一)</label>
-                <label><input type="checkbox" name="dates" value="11/8 (日)"> 11/8 (日)</label>
+                <label><input type="checkbox" name="dates" class="date-option" value="10/24 (六)"> 10/24 (六)</label>
+                <label><input type="checkbox" name="dates" class="date-option" value="10/25 (日)"> 10/25 (日)</label>
+                <label><input type="checkbox" name="dates" class="date-option" value="10/26 (一)"> 10/26 (一)</label>
+                <label><input type="checkbox" name="dates" class="date-option" value="11/8 (日)"> 11/8 (日)</label>
+                <label style="border-top: 1px dashed var(--border-color); padding-top: 10px; margin-top: 6px; color: #a34747;">
+                    <input type="checkbox" name="dates" id="noneOption" value="皆無法出席"> <b>皆無法出席</b>
+                </label>
             </div>
         </div>
 
@@ -188,18 +190,42 @@
             document.getElementById('displayGreeting').innerText = `${cleanName} 委員 您好：`;
             document.getElementById('name').value = cleanName;
         }
+
+        // 日期選項與「皆無法出席」的防呆互斥邏輯
+        const noneOption = document.getElementById('noneOption');
+        const dateOptions = document.querySelectorAll('.date-option');
+
+        noneOption.addEventListener('change', function() {
+            if (this.checked) {
+                dateOptions.forEach(opt => opt.checked = false);
+            }
+        });
+
+        dateOptions.forEach(opt => {
+            opt.addEventListener('change', function() {
+                if (this.checked) {
+                    noneOption.checked = false;
+                }
+            });
+        });
     });
 
     // 表單送出處理
     document.getElementById('voteForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
+        const dates = [];
+        document.querySelectorAll('input[name="dates"]:checked').forEach(cb => dates.push(cb.value));
+
+        if (dates.length === 0) {
+            alert("請至少選擇一個出席日期，或勾選「皆無法出席」。");
+            return;
+        }
+
         const btn = document.getElementById('submitBtn');
         btn.innerText = "資料傳送中...";
         btn.disabled = true;
 
-        const dates = [];
-        document.querySelectorAll('input[name="dates"]:checked').forEach(cb => dates.push(cb.value));
         const diet = document.querySelector('input[name="diet"]:checked').value;
 
         const data = {
