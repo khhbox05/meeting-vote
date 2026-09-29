@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>委員開會日期與用餐調查</title>
+    <style>
+        :root {
+            --primary: #4f6d7a;
+            --primary-hover: #3d5560;
+            --bg-color: #f3f5f7;
+            --card-bg: #ffffff;
+            --border-color: #dbe2e6;
+            --text-dark: #2c3e50;
+            --text-muted: #5a6b7b;
+            --accent-blue: #eef3f6;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            padding: 30px 16px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 640px;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
+        h2 { 
+            color: var(--primary); 
+            margin-top: 0; 
+            text-align: center; 
+            letter-spacing: 0.5px;
+        }
+        /* 邀請信件卡片 */
+        .invitation-card {
+            background: var(--accent-blue);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 24px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+        .invitation-greeting {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .form-group { margin-bottom: 20px; }
+        label { 
+            display: block; 
+            font-weight: 600; 
+            margin-bottom: 8px; 
+            color: var(--text-dark); 
+        }
+        input[type="text"], input[type="tel"], textarea {
+            width: 100%; 
+            padding: 12px 14px; 
+            border: 1px solid var(--border-color);
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 15px;
+            outline: none;
+            background: #fafbfc;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus, input[type="tel"]:focus, textarea:focus {
+            border-color: var(--primary);
+            background: #fff;
+        }
+        .radio-group, .checkbox-group {
+            background: #fafbfc; 
+            padding: 14px 16px; 
+            border-radius: 8px; 
+            border: 1px solid var(--border-color);
+        }
+        .radio-group label, .checkbox-group label {
+            display: inline-flex; 
+            align-items: center; 
+            font-weight: normal; 
+            margin-right: 20px; 
+            cursor: pointer;
+            user-select: none;
+        }
+        .checkbox-group label { 
+            display: flex; 
+            margin-bottom: 12px; 
+            margin-right: 0;
+        }
+        .checkbox-group label:last-child { margin-bottom: 0; }
+        input[type="radio"], input[type="checkbox"] { 
+            transform: scale(1.2); 
+            margin-right: 10px;
+            accent-color: var(--primary);
+        }
+        .btn-submit {
+            width: 100%; 
+            background: var(--primary); 
+            color: white; 
+            padding: 14px;
+            border: none; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            font-weight: 600;
+            cursor: pointer; 
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .btn-submit:hover { background: var(--primary-hover); }
+        .btn-submit:disabled { background: #9bb0bc; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>年度會議日期與用餐調查</h2>
+
+    <!-- 前端個人化邀請內容區塊 -->
+    <div class="invitation-card">
+        <div class="invitation-greeting" id="displayGreeting">尊敬的委員 您好：</div>
+        <p style="margin: 0;">
+            感謝您撥冗指導。為利安排委員會議日程，特此徵詢各位委員可出席之日期與用餐偏好，懇請於下方勾選方便與會的時段，以便會務小組統計與統籌安排。
+        </p>
+    </div>
+    
+    <form id="voteForm">
+        <div class="form-group">
+            <label for="name">姓名 <span style="color:#c94a4a;">*</span></label>
+            <input type="text" id="name" required placeholder="請輸入姓名">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">聯絡電話 <span style="color:#c94a4a;">*</span></label>
+            <input type="tel" id="phone" required placeholder="請輸入手機號碼">
+        </div>
+
+        <div class="form-group">
+            <label>用餐習慣 <span style="color:#c94a4a;">*</span></label>
+            <div class="radio-group">
+                <label><input type="radio" name="diet" value="葷食" checked> 葷食</label>
+                <label><input type="radio" name="diet" value="素食 (蛋奶素)"> 素食 (蛋奶素)</label>
+                <label><input type="radio" name="diet" value="素食 (全素)"> 素食 (全素)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>可出席日期 (可複選)</label>
+            <div class="checkbox-group">
+                <!-- 備選日期清單，可直接修改內容 -->
+                <label><input type="checkbox" name="dates" value="10/12 (一)"> 10/12 (一)</label>
+                <label><input type="checkbox" name="dates" value="10/13 (二)"> 10/13 (二)</label>
+                <label><input type="checkbox" name="dates" value="10/15 (四)"> 10/15 (四)</label>
+                <label><input type="checkbox" name="dates" value="10/16 (五)"> 10/16 (五)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="remarks">備註事項 (選填)</label>
+            <textarea id="remarks" rows="3" placeholder="如有其他特殊飲食禁忌或時段考量，請填寫於此..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">確認送出調查</button>
+    </form>
+</div>
+
+<script>
+    // 1. 替換為你的 Google Apps Script 部署 URL
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmVT96ftS9S2GelleoWcTRUs4uZ7OFvF_Fgna0HW4GgVRhvICli7gTrmQETh6MmC5ViQ/exec";
+
+    // 2. 頁面載入時讀取網址中的 ?name= 參數
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const memberName = urlParams.get('name');
+
+        if (memberName) {
+            const cleanName = decodeURIComponent(memberName).trim();
+            // 更新上方邀請信稱謂
+            document.getElementById('displayGreeting').innerText = `${cleanName} 委員 您好：`;
+            // 自動預填姓名欄位
+            document.getElementById('name').value = cleanName;
+        }
+    });
+
+    // 3. 表單送出處理
+    document.getElementById('voteForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const btn = document.getElementById('submitBtn');
+        btn.innerText = "資料傳送中...";
+        btn.disabled = true;
+
+        const dates = [];
+        document.querySelectorAll('input[name="dates"]:checked').forEach(cb => dates.push(cb.value));
+        const diet = document.querySelector('input[name="diet"]:checked').value;
+
+        const data = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            diet: diet,
+            dates: dates,
+            remarks: document.getElementById('remarks').value
+        };
+
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+        })
+        .then(response => response.json())
+        .then(result => {
+            alert("✓ 調查已送出！非常感謝您的撥冗協助。");
+            btn.innerText = "已成功送出";
+        })
+        .catch(error => {
+            alert("送出失敗，請確認網路連線或稍後再試。");
+            btn.innerText = "重新送出";
+            btn.disabled = false;
+        });
+    });
+</script>
+
+</body>
+</html>
