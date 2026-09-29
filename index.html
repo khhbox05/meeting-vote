@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>臺灣傳播學刊 - 委員開會日期與用餐調查</title>
+    <title>第 50 期編輯委員會議 - 日期與用餐調查</title>
     <style>
         :root {
             /* 臺灣傳播學刊專屬品牌色系 */
-            --primary-navy: #0a2878;      /* 深海軍藍 (主色/按鈕/主標題) */
+            --primary-navy: #0a2878;      /* 深海軍藍 */
             --primary-hover: #071c56;     /* 深藍懸浮態 */
-            --accent-cyan: #008db9;       /* 傳播幾何青藍 (強調/外框/焦點) */
+            --accent-cyan: #008db9;       /* 傳播幾何青藍 */
             --bg-page: #f4f7f9;           /* 頁面淡灰藍底色 */
             --card-bg: #ffffff;           /* 內容卡片純白底 */
             --card-tint: #f0f6fa;         /* 邀請卡片淡青藍襯底 */
             --border-color: #d6e2ea;      /* 結構細節線條色 */
-            --text-main: #2b2b2b;         /* 學刊標題深炭灰 (文字) */
+            --text-main: #2b2b2b;         /* 學刊標題深炭灰 */
             --text-muted: #5e6973;        /* 說明次要字體色 */
             --alert-red: #c23a3a;         /* 警示/未出席紅 */
         }
@@ -32,7 +32,7 @@
         .container {
             background: var(--card-bg);
             width: 100%;
-            max-width: 640px;
+            max-width: 660px;
             border-radius: 14px;
             padding: 36px 30px;
             box-shadow: 0 6px 24px rgba(10, 40, 120, 0.06);
@@ -67,7 +67,7 @@
         .invitation-card {
             background: var(--card-tint);
             border-left: 4px solid var(--accent-cyan);
-            padding: 16px 20px;
+            padding: 20px;
             border-radius: 0 8px 8px 0;
             margin-bottom: 26px;
             line-height: 1.75;
@@ -78,7 +78,41 @@
             font-size: 17px;
             font-weight: bold;
             color: var(--primary-navy);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* 會議基本資訊清單 */
+        .meeting-info {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin: 14px 0;
+            font-size: 14.5px;
+        }
+        .meeting-info p {
+            margin: 5px 0;
+        }
+        .attendees-list {
+            margin: 6px 0 2px 18px;
+            padding: 0;
+            color: #333;
+        }
+        .attendees-list li {
+            margin-bottom: 3px;
+        }
+
+        /* 交通費提醒小標籤 */
+        .travel-notice {
+            margin-top: 12px;
+            padding: 9px 12px;
+            background: #eaf3f8;
+            border-radius: 6px;
+            color: var(--primary-navy);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .form-group { margin-bottom: 22px; }
@@ -163,19 +197,40 @@
 <body>
 
 <div class="container">
-    <!-- Logo 區塊（檔名為 TJOC_logo.png） -->
+    <!-- Logo 區塊 -->
     <div class="logo-container">
         <img src="TJOC_logo.png" alt="臺灣傳播學刊 Logo" class="brand-logo">
     </div>
 
-    <h2>年度會議日期與用餐調查</h2>
+    <h2>第 50 期編輯委員會議</h2>
 
-    <!-- 前端個人化邀請內容區塊 -->
+    <!-- 前端個人化邀請內容與會議資訊 -->
     <div class="invitation-card">
-        <div class="invitation-greeting" id="displayGreeting">尊敬的委員 您好：</div>
-        <p style="margin: 0;">
-            感謝您撥冗指導。為利安排委員會議日程，特此徵詢各位委員可出席之日期與用餐偏好，懇請於下方勾選方便與會的時段，以便會務小組統計與統籌安排。
+        <div class="invitation-greeting" id="displayGreeting">委員 您好：</div>
+        <p style="margin: 0 0 10px 0;">
+            感謝您撥冗指導。為利安排編輯委員會議日程，特此徵詢各位委員可出席之日期與用餐偏好，懇請於下方勾選方便與會的時段，以利編輯室統計與統籌安排。
         </p>
+
+        <div class="meeting-info">
+            <p><b>開會時間：</b>未定，上午 10:00</p>
+            <p><b>開會地點：</b>台北市（詳細地點未定）</p>
+            <p><b>主 持 人：</b>王紹蓉 主編</p>
+            <p style="margin-top: 8px;"><b>出 席 者：</b></p>
+            <ul class="attendees-list">
+                <li>吳世家｜香港中文大學新聞與傳播學院</li>
+                <li>林淑芳｜國立政治大學傳播學院</li>
+                <li>邱玉蟬｜國立臺灣大學生物產業傳播暨發展學系</li>
+                <li>郭文平｜中國文化大學新聞暨傳播學院</li>
+                <li>黃毓超｜國立東華大學民族語言與傳播學系</li>
+                <li>簡妙如｜國立中正大學傳播學系</li>
+            </ul>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 2px 0 8px 18px;">(以上依姓氏筆劃由少至多排列)</p>
+            <p><b>列 席 者：</b>執行編輯 羅仕宇、助理編輯 陳泰良</p>
+        </div>
+
+        <div class="travel-notice">
+            🚆 <b>交通補助提醒：</b>車票（高鐵、台北往返）相關交通費，後續可由編輯室協助申請請款。
+        </div>
     </div>
     
     <form id="voteForm">
