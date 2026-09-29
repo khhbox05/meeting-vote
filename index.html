@@ -3,84 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>委員開會日期與用餐調查</title>
+    <title>臺灣傳播學刊 - 委員開會日期與用餐調查</title>
     <style>
         :root {
-            --primary: #4f6d7a;
-            --primary-hover: #3d5560;
-            --bg-color: #f3f5f7;
-            --card-bg: #ffffff;
-            --border-color: #dbe2e6;
-            --text-dark: #2c3e50;
-            --text-muted: #5a6b7b;
-            --accent-blue: #eef3f6;
+            /* 臺灣傳播學刊專屬品牌色系 */
+            --primary-navy: #0a2878;      /* 深海軍藍 (主色/按鈕/主標題) */
+            --primary-hover: #071c56;     /* 深藍懸浮態 */
+            --accent-cyan: #008db9;       /* 傳播幾何青藍 (強調/外框/焦點) */
+            --bg-page: #f4f7f9;           /* 頁面淡灰藍底色 */
+            --card-bg: #ffffff;           /* 內容卡片純白底 */
+            --card-tint: #f0f6fa;         /* 邀請卡片淡青藍襯底 */
+            --border-color: #d6e2ea;      /* 結構細節線條色 */
+            --text-main: #2b2b2b;         /* 學刊標題深炭灰 (文字) */
+            --text-muted: #5e6973;        /* 說明次要字體色 */
+            --alert-red: #c23a3a;         /* 警示/未出席紅 */
         }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
+            background-color: var(--bg-page);
+            color: var(--text-main);
             padding: 30px 16px;
             margin: 0;
             display: flex;
             justify-content: center;
         }
+
         .container {
             background: var(--card-bg);
             width: 100%;
             max-width: 640px;
-            border-radius: 12px;
-            padding: 32px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border-radius: 14px;
+            padding: 36px 30px;
+            box-shadow: 0 6px 24px rgba(10, 40, 120, 0.06);
             border: 1px solid var(--border-color);
             box-sizing: border-box;
         }
+
+        /* Logo 區域 */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .brand-logo {
+            max-height: 85px;
+            max-width: 85%;
+            height: auto;
+            width: auto;
+            display: inline-block;
+            object-fit: contain;
+        }
+
         h2 { 
-            color: var(--primary); 
+            color: var(--primary-navy); 
             margin-top: 0; 
             text-align: center; 
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            font-size: 22px;
+            font-weight: 700;
         }
-        /* 邀請信件卡片 */
+
+        /* 邀請卡片 (學刊雅緻風格) */
         .invitation-card {
-            background: var(--accent-blue);
-            border-left: 4px solid var(--primary);
+            background: var(--card-tint);
+            border-left: 4px solid var(--accent-cyan);
             padding: 16px 20px;
             border-radius: 0 8px 8px 0;
-            margin-bottom: 24px;
-            line-height: 1.7;
-            color: var(--text-dark);
+            margin-bottom: 26px;
+            line-height: 1.75;
+            color: var(--text-main);
             font-size: 15px;
         }
         .invitation-greeting {
             font-size: 17px;
             font-weight: bold;
-            color: var(--primary);
+            color: var(--primary-navy);
             margin-bottom: 8px;
         }
-        .form-group { margin-bottom: 20px; }
+
+        .form-group { margin-bottom: 22px; }
         label { 
             display: block; 
             font-weight: 600; 
             margin-bottom: 8px; 
-            color: var(--text-dark); 
+            color: var(--text-main); 
         }
+
         input[type="text"], input[type="tel"], textarea {
             width: 100%; 
             padding: 12px 14px; 
             border: 1px solid var(--border-color);
             border-radius: 8px; 
             box-sizing: border-box; 
-            font-size: 15px;
+            font-size: 16px;
             outline: none;
             background: #fafbfc;
-            transition: border-color 0.2s;
+            color: var(--text-main);
+            transition: all 0.2s ease;
         }
         input[type="text"]:focus, input[type="tel"]:focus, textarea:focus {
-            border-color: var(--primary);
-            background: #fff;
+            border-color: var(--accent-cyan);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(0, 141, 185, 0.12);
         }
+
         .radio-group, .checkbox-group {
-            background: #fafbfc; 
+            background: #fbfcfd; 
             padding: 14px 16px; 
             border-radius: 8px; 
             border: 1px solid var(--border-color);
@@ -89,7 +117,7 @@
             display: inline-flex; 
             align-items: center; 
             font-weight: normal; 
-            margin-right: 20px; 
+            margin-right: 22px; 
             cursor: pointer;
             user-select: none;
         }
@@ -99,31 +127,47 @@
             margin-right: 0;
         }
         .checkbox-group label:last-child { margin-bottom: 0; }
+
         input[type="radio"], input[type="checkbox"] { 
             transform: scale(1.2); 
             margin-right: 10px;
-            accent-color: var(--primary);
+            accent-color: var(--primary-navy);
         }
+
         .btn-submit {
             width: 100%; 
-            background: var(--primary); 
-            color: white; 
-            padding: 14px;
+            background: var(--primary-navy); 
+            color: #ffffff; 
+            padding: 15px;
             border: none; 
             border-radius: 8px; 
             font-size: 16px; 
             font-weight: 600;
             cursor: pointer; 
-            transition: background 0.2s;
+            transition: background 0.2s ease, transform 0.1s ease;
             margin-top: 10px;
+            letter-spacing: 0.5px;
         }
-        .btn-submit:hover { background: var(--primary-hover); }
-        .btn-submit:disabled { background: #9bb0bc; cursor: not-allowed; }
+        .btn-submit:hover { 
+            background: var(--primary-hover); 
+        }
+        .btn-submit:active {
+            transform: scale(0.99);
+        }
+        .btn-submit:disabled { 
+            background: #99a8b5; 
+            cursor: not-allowed; 
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <!-- Logo 區塊（檔名為 TJOC_logo.png） -->
+    <div class="logo-container">
+        <img src="TJOC_logo.png" alt="臺灣傳播學刊 Logo" class="brand-logo">
+    </div>
+
     <h2>年度會議日期與用餐調查</h2>
 
     <!-- 前端個人化邀請內容區塊 -->
@@ -136,17 +180,17 @@
     
     <form id="voteForm">
         <div class="form-group">
-            <label for="name">姓名 <span style="color:#c94a4a;">*</span></label>
+            <label for="name">姓名 <span style="color: var(--alert-red);">*</span></label>
             <input type="text" id="name" required placeholder="請輸入姓名">
         </div>
 
         <div class="form-group">
-            <label for="phone">聯絡電話 <span style="color:#c94a4a;">*</span></label>
+            <label for="phone">聯絡電話 <span style="color: var(--alert-red);">*</span></label>
             <input type="tel" id="phone" required placeholder="請輸入手機號碼">
         </div>
 
         <div class="form-group">
-            <label>用餐習慣 <span style="color:#c94a4a;">*</span></label>
+            <label>用餐習慣 <span style="color: var(--alert-red);">*</span></label>
             <div class="radio-group">
                 <label><input type="radio" name="diet" value="葷食" checked> 葷食</label>
                 <label><input type="radio" name="diet" value="素食 (蛋奶素)"> 素食 (蛋奶素)</label>
@@ -161,7 +205,7 @@
                 <label><input type="checkbox" name="dates" class="date-option" value="10/25 (日)"> 10/25 (日)</label>
                 <label><input type="checkbox" name="dates" class="date-option" value="10/26 (一)"> 10/26 (一)</label>
                 <label><input type="checkbox" name="dates" class="date-option" value="11/8 (日)"> 11/8 (日)</label>
-                <label style="border-top: 1px dashed var(--border-color); padding-top: 10px; margin-top: 6px; color: #a34747;">
+                <label style="border-top: 1px dashed var(--border-color); padding-top: 10px; margin-top: 6px; color: var(--alert-red);">
                     <input type="checkbox" name="dates" id="noneOption" value="皆無法出席"> <b>皆無法出席</b>
                 </label>
             </div>
@@ -191,7 +235,7 @@
             document.getElementById('name').value = cleanName;
         }
 
-        // 日期選項與「皆無法出席」的防呆互斥邏輯
+        // 日期選項與「皆無法出席」互斥防呆
         const noneOption = document.getElementById('noneOption');
         const dateOptions = document.querySelectorAll('.date-option');
 
