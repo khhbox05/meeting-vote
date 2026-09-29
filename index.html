@@ -157,11 +157,11 @@
         <div class="form-group">
             <label>可出席日期 (可複選)</label>
             <div class="checkbox-group">
-                <!-- 備選日期清單，可直接修改內容 -->
-                <label><input type="checkbox" name="dates" value="10/12 (一)"> 10/12 (一)</label>
-                <label><input type="checkbox" name="dates" value="10/13 (二)"> 10/13 (二)</label>
-                <label><input type="checkbox" name="dates" value="10/15 (四)"> 10/15 (四)</label>
-                <label><input type="checkbox" name="dates" value="10/16 (五)"> 10/16 (五)</label>
+                <!-- 更新後的四個日期選項 -->
+                <label><input type="checkbox" name="dates" value="10/24 (六)"> 10/24 (六)</label>
+                <label><input type="checkbox" name="dates" value="10/25 (日)"> 10/25 (日)</label>
+                <label><input type="checkbox" name="dates" value="10/26 (一)"> 10/26 (一)</label>
+                <label><input type="checkbox" name="dates" value="11/8 (日)"> 11/8 (日)</label>
             </div>
         </div>
 
@@ -175,24 +175,22 @@
 </div>
 
 <script>
-    // 1. 替換為你的 Google Apps Script 部署 URL
+    // 你的專屬 Google Apps Script 部署 URL
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmVT96ftS9S2GelleoWcTRUs4uZ7OFvF_Fgna0HW4GgVRhvICli7gTrmQETh6MmC5ViQ/exec";
 
-    // 2. 頁面載入時讀取網址中的 ?name= 參數
+    // 讀取網址中的 ?name= 參數
     window.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const memberName = urlParams.get('name');
 
         if (memberName) {
             const cleanName = decodeURIComponent(memberName).trim();
-            // 更新上方邀請信稱謂
             document.getElementById('displayGreeting').innerText = `${cleanName} 委員 您好：`;
-            // 自動預填姓名欄位
             document.getElementById('name').value = cleanName;
         }
     });
 
-    // 3. 表單送出處理
+    // 表單送出處理
     document.getElementById('voteForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
