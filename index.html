@@ -17,6 +17,7 @@
             --text-main: #2b2b2b;         /* 學刊標題深炭灰 */
             --text-muted: #5e6973;        /* 說明次要字體色 */
             --alert-red: #c23a3a;         /* 警示/未出席紅 */
+            --all-green: #2d8a4e;         /* 全可綠色 */
         }
 
         body {
@@ -190,12 +191,39 @@
             user-select: none;
         }
 
+        /* 快速選項卡片 */
+        .quick-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 14px;
+        }
+        @media (max-width: 520px) {
+            .quick-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .all-card {
+            background: #f2f9f4;
+            border: 1px dashed #97cfab;
+            border-radius: 8px;
+            padding: 12px 14px;
+        }
+        .all-card label {
+            margin-bottom: 0;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            color: var(--all-green);
+            font-weight: 600;
+        }
+
         .none-card {
             background: #fffafa;
             border: 1px dashed #e8b0b0;
             border-radius: 8px;
-            padding: 14px 16px;
-            margin-top: 14px;
+            padding: 12px 14px;
         }
         .none-card label {
             margin-bottom: 0;
@@ -273,7 +301,7 @@
         </div>
 
         <div class="travel-notice">
-            🚆 <b>交通補助提醒：</b>車票（高鐵、台北往返）相關交通費，後續可由編輯室協助申請請款。
+            🚆 <b>往返車票（高鐵、臺鐵）費用，可由編輯室協助申請請款。
         </div>
     </div>
     
@@ -302,50 +330,61 @@
             <label>可出席日期與時段 (可複選) <span style="color: var(--alert-red);">*</span></label>
             
             <!-- 10/24 (六) -->
-            <div class="date-slot-card">
+            <div class="date-slot-card" data-day="10/24(六)">
                 <div class="date-title">📅 10/24 (六)</div>
                 <div class="slot-options">
                     <label><input type="checkbox" class="time-checkbox" data-date="10/24(六)" value="10-14"> 10-14</label>
                     <label><input type="checkbox" class="time-checkbox" data-date="10/24(六)" value="14-16"> 14-16</label>
                     <label><input type="checkbox" class="time-checkbox" data-date="10/24(六)" value="16-18"> 16-18</label>
+                    <label style="color: var(--primary-navy); font-weight: bold;"><input type="checkbox" class="day-all-checkbox" data-day-target="10/24(六)"> 當天時段皆可</label>
                 </div>
             </div>
 
             <!-- 10/25 (日) -->
-            <div class="date-slot-card">
+            <div class="date-slot-card" data-day="10/25(日)">
                 <div class="date-title">📅 10/25 (日)</div>
                 <div class="slot-options">
                     <label><input type="checkbox" class="time-checkbox" data-date="10/25(日)" value="10-14"> 10-14</label>
                     <label><input type="checkbox" class="time-checkbox" data-date="10/25(日)" value="14-16"> 14-16</label>
                     <label><input type="checkbox" class="time-checkbox" data-date="10/25(日)" value="16-18"> 16-18</label>
+                    <label style="color: var(--primary-navy); font-weight: bold;"><input type="checkbox" class="day-all-checkbox" data-day-target="10/25(日)"> 當天時段皆可</label>
                 </div>
             </div>
 
             <!-- 10/26 (一) -->
-            <div class="date-slot-card">
+            <div class="date-slot-card" data-day="10/26(一)">
                 <div class="date-title">📅 10/26 (一)</div>
                 <div class="slot-options">
                     <label><input type="checkbox" class="time-checkbox" data-date="10/26(一)" value="10-14"> 10-14</label>
                     <label><input type="checkbox" class="time-checkbox" data-date="10/26(一)" value="14-16"> 14-16</label>
                     <label><input type="checkbox" class="time-checkbox" data-date="10/26(一)" value="16-18"> 16-18</label>
+                    <label style="color: var(--primary-navy); font-weight: bold;"><input type="checkbox" class="day-all-checkbox" data-day-target="10/26(一)"> 當天時段皆可</label>
                 </div>
             </div>
 
             <!-- 11/8 (日) -->
-            <div class="date-slot-card">
+            <div class="date-slot-card" data-day="11/8(日)">
                 <div class="date-title">📅 11/8 (日)</div>
                 <div class="slot-options">
                     <label><input type="checkbox" class="time-checkbox" data-date="11/8(日)" value="10-14"> 10-14</label>
                     <label><input type="checkbox" class="time-checkbox" data-date="11/8(日)" value="14-16"> 14-16</label>
                     <label><input type="checkbox" class="time-checkbox" data-date="11/8(日)" value="16-18"> 16-18</label>
+                    <label style="color: var(--primary-navy); font-weight: bold;"><input type="checkbox" class="day-all-checkbox" data-day-target="11/8(日)"> 當天時段皆可</label>
                 </div>
             </div>
 
-            <!-- 皆無法出席 -->
-            <div class="none-card">
-                <label>
-                    <input type="checkbox" id="noneOption" value="皆無法出席"> <b>以上日期時段皆無法出席</b>
-                </label>
+            <!-- 底部快速勾選區：全可 / 皆無法出席 -->
+            <div class="quick-options">
+                <div class="all-card">
+                    <label>
+                        <input type="checkbox" id="allAvailableOption"> ✨ <b>以上日期時段皆可</b>
+                    </label>
+                </div>
+                <div class="none-card">
+                    <label>
+                        <input type="checkbox" id="noneOption" value="皆無法出席"> <b>以上日期時段皆無法出席</b>
+                    </label>
+                </div>
             </div>
         </div>
 
@@ -362,7 +401,6 @@
     // 你的專屬 Google Apps Script 部署 URL
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmVT96ftS9S2GelleoWcTRUs4uZ7OFvF_Fgna0HW4GgVRhvICli7gTrmQETh6MmC5ViQ/exec";
 
-    // 讀取網址中的 ?name= 參數
     window.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const memberName = urlParams.get('name');
@@ -373,23 +411,67 @@
             document.getElementById('name').value = cleanName;
         }
 
-        // 時段與「皆無法出席」互斥防呆
         const noneOption = document.getElementById('noneOption');
+        const allAvailableOption = document.getElementById('allAvailableOption');
         const timeCheckboxes = document.querySelectorAll('.time-checkbox');
+        const dayAllCheckboxes = document.querySelectorAll('.day-all-checkbox');
 
-        noneOption.addEventListener('change', function() {
-            if (this.checked) {
-                timeCheckboxes.forEach(cb => cb.checked = false);
-            }
-        });
+        // 1. 各天「當天時段皆可」連動邏輯
+        dayAllCheckboxes.forEach(dayAll => {
+            dayAll.addEventListener('change', function() {
+                const targetDay = this.getAttribute('data-day-target');
+                const targetTimes = document.querySelectorAll(`.time-checkbox[data-date="${targetDay}"]`);
+                targetTimes.forEach(t => t.checked = this.checked);
 
-        timeCheckboxes.forEach(cb => {
-            cb.addEventListener('change', function() {
                 if (this.checked) {
                     noneOption.checked = false;
                 }
+                checkAllAvailableStatus();
             });
         });
+
+        // 2. 個別時段改變時，回推檢查當天「時段皆可」與全局「皆可」
+        timeCheckboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                const targetDay = this.getAttribute('data-date');
+                const targetTimes = document.querySelectorAll(`.time-checkbox[data-date="${targetDay}"]`);
+                const dayAll = document.querySelector(`.day-all-checkbox[data-day-target="${targetDay}"]`);
+                
+                const allDayChecked = Array.from(targetTimes).every(t => t.checked);
+                dayAll.checked = allDayChecked;
+
+                if (this.checked) {
+                    noneOption.checked = false;
+                }
+                checkAllAvailableStatus();
+            });
+        });
+
+        // 3. 「以上日期時段皆可」總開關
+        allAvailableOption.addEventListener('change', function() {
+            if (this.checked) {
+                timeCheckboxes.forEach(cb => cb.checked = true);
+                dayAllCheckboxes.forEach(cb => cb.checked = true);
+                noneOption.checked = false;
+            } else {
+                timeCheckboxes.forEach(cb => cb.checked = false);
+                dayAllCheckboxes.forEach(cb => cb.checked = false);
+            }
+        });
+
+        // 4. 「以上日期時段皆無法出席」
+        noneOption.addEventListener('change', function() {
+            if (this.checked) {
+                timeCheckboxes.forEach(cb => cb.checked = false);
+                dayAllCheckboxes.forEach(cb => cb.checked = false);
+                allAvailableOption.checked = false;
+            }
+        });
+
+        function checkAllAvailableStatus() {
+            const allChecked = Array.from(timeCheckboxes).every(cb => cb.checked);
+            allAvailableOption.checked = allChecked;
+        }
     });
 
     // 表單送出處理
@@ -397,6 +479,7 @@
         e.preventDefault();
         
         const noneOption = document.getElementById('noneOption');
+        const allAvailableOption = document.getElementById('allAvailableOption');
         const timeCheckboxes = document.querySelectorAll('.time-checkbox:checked');
 
         if (!noneOption.checked && timeCheckboxes.length === 0) {
@@ -408,6 +491,8 @@
         let scheduleString = "";
         if (noneOption.checked) {
             scheduleString = "皆無法出席";
+        } else if (allAvailableOption.checked) {
+            scheduleString = "以上日期時段皆可 (全可配合)";
         } else {
             const scheduleMap = {};
             timeCheckboxes.forEach(cb => {
@@ -419,9 +504,15 @@
                 scheduleMap[date].push(slot);
             });
 
-            // 格式化為：10/24(六) [10-14, 14-16]; 11/8(日) [16-18]
+            // 格式化為：10/24(六) [10-14, 14-16]; 11/8(日) [全日皆可]
             scheduleString = Object.keys(scheduleMap)
-                .map(date => `${date} [${scheduleMap[date].join(', ')}]`)
+                .map(date => {
+                    const slots = scheduleMap[date];
+                    if (slots.length === 3) {
+                        return `${date} [時段皆可]`;
+                    }
+                    return `${date} [${slots.join(', ')}]`;
+                })
                 .join('; ');
         }
 
